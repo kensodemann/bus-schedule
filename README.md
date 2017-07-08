@@ -8,7 +8,7 @@ Demo App
 
 Build, then deploy:
 
-- `ng build --prod --base-href "/time-trax/"`
+- `ng build --prod --base-href "/bus-schedule/"`
 - `cp dist/index.html dist/404.html`
 - `ngh --message='chore: deploy version x.y.z'`
 
