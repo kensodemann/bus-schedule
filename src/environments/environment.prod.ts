@@ -1,3 +1,4 @@
 export const environment = {
-  production: true
+  production: true,
+  dataServiceUrl: 'http://webservices.nextbus.com/service/publicXMLFeed'
 };
