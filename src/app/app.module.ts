@@ -4,6 +4,7 @@ import { AgmCoreModule } from '@agm/core';
 
 import { AppComponent } from './app.component';
 import { SharedModule } from './shared/shared.module';
+import { CoreModule } from './core/core.module';
 
 @NgModule({
   declarations: [
@@ -14,7 +15,8 @@ import { SharedModule } from './shared/shared.module';
       apiKey: 'AIzaSyC8NhMC5XLiRYFlGGFBFCvup3tTf2eFlKI'
     }),
     BrowserModule,
-    SharedModule
+    SharedModule,
+    CoreModule
   ],
   providers: [],
   bootstrap: [AppComponent]
