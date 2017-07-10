@@ -1,7 +1,7 @@
 import { TestBed, async } from '@angular/core/testing';
-import { AgmCoreModule } from '@agm/core';
 
 import { AppComponent } from './app.component';
+import { CoreModule } from './core/core.module';
 import { SharedModule } from './shared/shared.module';
 
 describe('AppComponent', () => {
@@ -11,7 +11,7 @@ describe('AppComponent', () => {
         AppComponent
       ],
       imports: [
-        AgmCoreModule.forRoot(),
+        CoreModule,
         SharedModule
       ]
     }).compileComponents();

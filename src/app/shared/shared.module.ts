@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
-import { NextBusMapModule } from './next-bus-map/next-bus-map.module';
+import { MapModule } from './map/map.module';
 
 @NgModule({
   exports: [
-    NextBusMapModule
+    MapModule
   ]
 })
 export class SharedModule { }
