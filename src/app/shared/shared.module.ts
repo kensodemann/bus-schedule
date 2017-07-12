@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
-import { MapModule } from './map/map.module';
+import { VehicleLocationMapModule } from './vehicle-location-map/vehicle-location-map.module';
 
 @NgModule({
   exports: [
-    MapModule
+    VehicleLocationMapModule
   ]
 })
 export class SharedModule { }
