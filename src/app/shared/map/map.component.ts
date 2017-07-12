@@ -24,8 +24,8 @@ export class MapComponent implements OnInit {
     };
     const map = new google.maps.Map(document.getElementById('bus-map'), mapProp);
 
-    this.vehicleLocations.updates.subscribe(locs => {
-      locs.forEach(loc => {
+    this.vehicleLocations.data.subscribe(locs => {
+      locs.locations.forEach(loc => {
         const m = new google.maps.Marker({
           position: new google.maps.LatLng(loc.lat, loc.lon),
           map: map
@@ -33,7 +33,7 @@ export class MapComponent implements OnInit {
       });
     });
 
-    this.vehicleLocations.load('sf-muni');
+    this.vehicleLocations.refresh('sf-muni');
   }
 
 }
