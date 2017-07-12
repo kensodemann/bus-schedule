@@ -16,10 +16,16 @@ window['google'] = {
 };
 
 class VehicleLocationServiceMock {
-  updates: Subject<any>;
+  data: Subject<any>;
+  testLastTime: number;
   testVehicles: Array<any> = [];
-  constructor() { this.updates = new Subject; }
-  load(agency: string): void { this.updates.next(this.testVehicles); }
+  constructor() { this.data = new Subject; }
+  refresh(agency: string, since?: number): void {
+    this.data.next({
+      lastTime: this.testLastTime,
+      locations: this.testVehicles
+    });
+  }
 }
 
 describe('NextBusMapComponent', () => {
