@@ -99,6 +99,53 @@ describe('VehicleLocationService', () => {
         }]
       });
     });
+
+    it('emits an array of one with a single vehicle in the response', () => {
+      let body = '<body><lastTime time="1499622357839" />';
+      body += location('314', 'wauk', 73.9950, -122.0050);
+      body += '</body>';
+      let connection: MockConnection;
+      mockBackend.connections.subscribe(c => connection = c);
+      let result: any;
+      service.data.subscribe(r => result = r);
+      service.refresh('umn-twin', 1499622348293);
+      connection.mockRespond(new Response(new ResponseOptions({
+        status: 200,
+        body: body
+      })));
+      expect(result).toEqual({
+        lastTime: 1499622357839,
+        locations: [{
+          id: '314',
+          routeTag: 'wauk',
+          dirTag: '30___O_S10',
+          lat: '73.995',
+          lon: '-122.005',
+          secsSinceReport: '20',
+          predictable: 'true',
+          heading: '350',
+          speedKmHr: '0'
+        }]
+      });
+    });
+
+    it('emits an empty array with no vehicles in the response', () => {
+      let body = '<body><lastTime time="1499622357839" />';
+      body += '</body>';
+      let connection: MockConnection;
+      mockBackend.connections.subscribe(c => connection = c);
+      let result: any;
+      service.data.subscribe(r => result = r);
+      service.refresh('umn-twin', 1499622348293);
+      connection.mockRespond(new Response(new ResponseOptions({
+        status: 200,
+        body: body
+      })));
+      expect(result).toEqual({
+        lastTime: 1499622357839,
+        locations: []
+      });
+    });
   });
 
   function location(id: string, route: string, lat: number, lon: number) {

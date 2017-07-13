@@ -16,7 +16,6 @@ export class VehicleLocationService {
   private lastAgency: string;
   private lastTime: number;
 
-  // TODO: rename to "data"
   data: Subject<any>;
 
   constructor(private http: Http) {
@@ -38,8 +37,8 @@ export class VehicleLocationService {
     parseString(xml, { explicitArray: false, mergeAttrs: true }, (err, result) => {
       this.data.next({
         lastTime: parseInt(result.body.lastTime.time, 10),
-        // TODO: this should be converted to an array if need be... Create test for that.
-        locations: result.body.vehicle
+        locations: !result.body.vehicle ? [] :
+          Array.isArray(result.body.vehicle) ? result.body.vehicle : [result.body.vehicle]
       });
     });
   }
