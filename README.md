@@ -4,6 +4,17 @@
 
 Demo App
 
+## Running Local
+
+Standard workflow:
+
+- `yarn`
+- open three terminals, run one command in each:
+  - `npm test`
+  - `npm start`
+  - `npm run lint`
+- [http://localhost:4200/](http://localhost:4200/)
+
 ## Deploying to Github Pages
 
 Build, then deploy:
