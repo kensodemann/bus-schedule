@@ -1,4 +1,5 @@
 import { TestBed, async } from '@angular/core/testing';
+import { MdCheckboxModule, MdIconModule, MdListModule, MdSidenavModule, MdToolbarModule } from '@angular/material';
 
 import { AppComponent } from './app.component';
 import { CoreModule } from './core/core.module';
@@ -12,6 +13,11 @@ describe('AppComponent', () => {
       ],
       imports: [
         CoreModule,
+        MdCheckboxModule,
+        MdIconModule,
+        MdListModule,
+        MdSidenavModule,
+        MdToolbarModule,
         SharedModule
       ]
     }).compileComponents();

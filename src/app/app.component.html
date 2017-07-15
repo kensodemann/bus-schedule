@@ -1,3 +1,19 @@
-<h1>{{title}}</h1>
+<md-sidenav-container fullscreen>
+  <md-sidenav #sidenav mode="side" class="bus-sidenav">
+   <md-list>
+     <md-list-item>
+       <md-checkbox>A Checkbox</md-checkbox>
+     </md-list-item>
+   </md-list>
+  </md-sidenav>
 
+  <md-toolbar color="primary">
+    <button class="bus-icon-button" (click)="sidenav.toggle()">
+      <md-icon>menu</md-icon>
+    </button> Bus Locations
+    <span class="bus-toolbar-filler"></span>
+  </md-toolbar>
+  
 <bus-vehicle-location-map></bus-vehicle-location-map>
+
+</md-sidenav-container>
