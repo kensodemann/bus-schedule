@@ -1,18 +1,18 @@
 import { Http, Response, ResponseOptions, RequestMethod, BaseRequestOptions } from '@angular/http';
 import { MockBackend, MockConnection } from '@angular/http/testing';
 
-import { VehicleLocationService } from './vehicle-location.service';
+import { VehicleLocationsService } from './vehicle-locations.service';
 
 describe('VehicleLocationService', () => {
   let mockBackend: MockBackend;
-  let service: VehicleLocationService;
+  let service: VehicleLocationsService;
 
   beforeEach(() => {
     const opt = new BaseRequestOptions();
     mockBackend = new MockBackend();
     const http = new Http(mockBackend, opt);
 
-    service = new VehicleLocationService(http);
+    service = new VehicleLocationsService(http);
   });
 
   it('exists', () => {

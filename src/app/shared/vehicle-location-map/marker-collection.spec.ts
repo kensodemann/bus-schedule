@@ -1,5 +1,5 @@
 import { MarkerCollection } from './marker-collection';
-import { VehicleLocation } from '../../core/vehicle-location/vehicle-location';
+import { VehicleLocation } from '../../core/vehicle-locations/vehicle-location';
 
 window['google'] = {
   maps: {

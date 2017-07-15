@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 
 import { MarkerCollection } from './marker-collection';
-import { VehicleLocationService } from '../../core/vehicle-location/vehicle-location.service';
+import { VehicleLocationsService } from '../../core/vehicle-locations/vehicle-locations.service';
 
 declare var google: any;
 
@@ -15,7 +15,7 @@ export class VehicleLocationMapComponent implements OnDestroy, OnInit {
   private map;
   private markers: MarkerCollection;
 
-  constructor(private vehicleLocations: VehicleLocationService) { }
+  constructor(private vehicleLocations: VehicleLocationsService) { }
 
   ngOnInit() {
     this.createMap();

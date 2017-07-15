@@ -4,7 +4,7 @@ import { HttpModule } from '@angular/http';
 
 import { throwIfAlreadyLoaded } from './module-import-guard';
 
-import { VehicleLocationService } from './vehicle-location/vehicle-location.service';
+import { VehicleLocationsService } from './vehicle-locations/vehicle-locations.service';
 
 @NgModule({
   imports: [
@@ -12,7 +12,7 @@ import { VehicleLocationService } from './vehicle-location/vehicle-location.serv
     HttpModule
   ],
   providers: [
-    VehicleLocationService
+    VehicleLocationsService
   ]
 })
 export class CoreModule {

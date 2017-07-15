@@ -1,4 +1,4 @@
-import { VehicleLocation } from '../../core/vehicle-location/vehicle-location';
+import { VehicleLocation } from '../../core/vehicle-locations/vehicle-location';
 
 declare var google: any;
 

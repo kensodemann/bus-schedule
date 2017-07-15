@@ -5,12 +5,12 @@ import { Subject } from 'rxjs/Subject';
 import { parseString } from 'xml2js';
 
 import { environment } from '../../../environments/environment';
-import { VehicleLoctationResponse } from './vehicle-location-response';
+import { VehicleLoctationsResponse } from './vehicle-locations-response';
 
 @Injectable()
-export class VehicleLocationService {
+export class VehicleLocationsService {
 
-  data: Subject<VehicleLoctationResponse>;
+  data: Subject<VehicleLoctationsResponse>;
 
   constructor(private http: Http) {
     this.data = new Subject();
