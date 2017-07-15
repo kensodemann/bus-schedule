@@ -18,6 +18,10 @@ Posible improvements:
 - Allow for selection of a different agency
 - I may think of other stuff...
 
+Possible Improvements I Have Managed to Accomplish:
+
+- Persist selected routes to local storage
+
 ## Running Local
 
 Standard workflow:

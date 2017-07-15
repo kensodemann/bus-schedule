@@ -1,13 +1,15 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs/Subject';
+import { LocalStorageService } from 'angular-2-local-storage';
 
 @Injectable()
 export class RouteOptionsService {
-  private options = {};
+  private options;
 
   changedOptions: Subject<Array<{ agency: string, route: string }>>
 
-  constructor() {
+  constructor(private localStorage: LocalStorageService) {
+    this.options = this.localStorage.get('routeOptions') || {};
     this.changedOptions = new Subject();
    }
 
@@ -29,5 +31,6 @@ export class RouteOptionsService {
     this.options[agency] = this.options[agency] || {};
     routes.forEach(route => this.options[agency][route] = visible);
     this.changedOptions.next(routes.map<{ agency: string, route: string }>(r => ({ agency: agency, route: r })));
+    this.localStorage.set('routeOptions', this.options);
   }
 }
