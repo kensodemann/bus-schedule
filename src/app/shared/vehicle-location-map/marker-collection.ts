@@ -7,20 +7,28 @@ export class MarkerCollection {
 
   constructor(private map: any) { }
 
-  merge(loc: VehicleLocation): void {
+  merge(loc: VehicleLocation, show: boolean): void {
     if (this.markerExists(loc)) {
-      this.moveMarker(loc);
+      this.moveMarker(loc, show);
     } else {
-      this.addMarker(loc);
+      this.addMarker(loc, show);
     }
     this.removeFromOtherRoutes(loc);
   }
 
-  private addMarker(loc: VehicleLocation): void {
+  hide(route: string) {
+    this.setMapOnMarkers(route, null);
+  }
+
+  show(route: string) {
+    this.setMapOnMarkers(route, this.map);
+  }
+
+  private addMarker(loc: VehicleLocation, show: boolean): void {
     this.hash[loc.routeTag] = this.hash[loc.routeTag] || {};
     this.hash[loc.routeTag][loc.id] = new google.maps.Marker({
       position: new google.maps.LatLng(loc.lat, loc.lon),
-      map: this.map,
+      map: show ? this.map : null,
       title: loc.id
     });
   }
@@ -29,8 +37,10 @@ export class MarkerCollection {
     return this.hash[loc.routeTag] && this.hash[loc.routeTag][loc.id];
   }
 
-  private moveMarker(loc: VehicleLocation): void {
-    this.hash[loc.routeTag][loc.id].setPosition(new google.maps.LatLng(loc.lat, loc.lon));
+  private moveMarker(loc: VehicleLocation, show: boolean): void {
+    const marker = this.hash[loc.routeTag][loc.id];
+    marker.setPosition(new google.maps.LatLng(loc.lat, loc.lon));
+    marker.setMap(show ? this.map : null);
   }
 
   private removeFromOtherRoutes(loc: VehicleLocation): void {
@@ -41,5 +51,12 @@ export class MarkerCollection {
         delete this.hash[route][loc.id];
       }
     });
+  }
+
+  private setMapOnMarkers(route: string, map: any) {
+    if (this.hash[route]) {
+      const keys = Object.keys(this.hash[route]);
+      keys.forEach(key => this.hash[route][key].setMap(map));
+    }
   }
 }

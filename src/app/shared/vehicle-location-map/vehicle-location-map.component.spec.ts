@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { Subject } from 'rxjs/Subject';
 
+import { RouteOptionsService } from '../../core/route-options/route-options.service';
 import { VehicleLocationMapComponent } from './vehicle-location-map.component';
 import { VehicleLocationsService } from '../../core/vehicle-locations/vehicle-locations.service';
 
@@ -28,7 +29,7 @@ class VehicleLocationServiceMock {
   }
 }
 
-describe('NextBusMapComponent', () => {
+describe('VehicleLocationMapComponent', () => {
   let component: VehicleLocationMapComponent;
   let fixture: ComponentFixture<VehicleLocationMapComponent>;
 
@@ -36,6 +37,7 @@ describe('NextBusMapComponent', () => {
     TestBed.configureTestingModule({
       declarations: [VehicleLocationMapComponent],
       providers: [
+        RouteOptionsService,
         { provide: VehicleLocationsService, useClass: VehicleLocationServiceMock }
       ]
     }).compileComponents();
