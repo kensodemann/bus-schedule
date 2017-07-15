@@ -35,7 +35,7 @@ describe('MarkerCollection', () => {
         lng: testVehicle.lon
       });
       spyOn(google.maps, 'Marker').and.returnValue({});
-      m.merge(testVehicle);
+      m.merge(testVehicle, true);
       expect(google.maps.LatLng).toHaveBeenCalledTimes(1);
       expect(google.maps.LatLng).toHaveBeenCalledWith(testVehicle.lat, testVehicle.lon);
       expect(google.maps.Marker).toHaveBeenCalledTimes(1);
@@ -46,6 +46,26 @@ describe('MarkerCollection', () => {
       });
     });
 
+    it('creates a new marker without a map if show is false', () => {
+      const map = { name: 'I am map' };
+      const m = new MarkerCollection(map);
+      spyOn(google.maps, 'LatLng').and.returnValue({
+        lat: testVehicle.lat,
+        lng: testVehicle.lon
+      });
+      spyOn(google.maps, 'Marker').and.returnValue({});
+      m.merge(testVehicle, false);
+      expect(google.maps.LatLng).toHaveBeenCalledTimes(1);
+      expect(google.maps.LatLng).toHaveBeenCalledWith(testVehicle.lat, testVehicle.lon);
+      expect(google.maps.Marker).toHaveBeenCalledTimes(1);
+      expect(google.maps.Marker).toHaveBeenCalledWith({
+        position: { lat: testVehicle.lat, lng: testVehicle.lon },
+        map: null,
+        title: testVehicle.id
+      });
+    });
+
+
     it('moves an existing marker', () => {
       const map = { name: 'I am map' };
       const m = new MarkerCollection(map);
@@ -53,22 +73,14 @@ describe('MarkerCollection', () => {
         lat: testVehicle.lat,
         lng: testVehicle.lon
       });
-      const marker = { setPosition: function() { } };
+      const marker = { setPosition: function() { }, setMap: function() { } };
       spyOn(google.maps, 'Marker').and.returnValue(marker);
-      m.merge(testVehicle);
+      m.merge(testVehicle, true);
       spyOn(marker, 'setPosition');
       testVehicle.lat = '74';
       testVehicle.lon = '-121.98';
-      m.merge(testVehicle);
+      m.merge(testVehicle, true);
       expect(marker.setPosition).toHaveBeenCalledTimes(1);
-    });
-
-    it('adds a new marker if a vehicle changes route', () => {
-
-    });
-
-    it('removes the old marker if a vehicle changes route', () => {
-
     });
   });
 

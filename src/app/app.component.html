@@ -1,10 +1,6 @@
 <md-sidenav-container fullscreen>
   <md-sidenav #sidenav mode="side" class="bus-sidenav">
-   <md-list>
-     <md-list-item>
-       <md-checkbox>A Checkbox</md-checkbox>
-     </md-list-item>
-   </md-list>
+   <bus-route-list [routes]="routes"></bus-route-list>
   </md-sidenav>
 
   <md-toolbar color="primary">
@@ -13,7 +9,7 @@
     </button> Bus Locations
     <span class="bus-toolbar-filler"></span>
   </md-toolbar>
-  
+
 <bus-vehicle-location-map></bus-vehicle-location-map>
 
 </md-sidenav-container>

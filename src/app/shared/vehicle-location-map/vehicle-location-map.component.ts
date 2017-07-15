@@ -1,6 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs/Subscription';
 
 import { MarkerCollection } from './marker-collection';
+import { RouteOptionsService } from '../../core/route-options/route-options.service';
 import { VehicleLocationsService } from '../../core/vehicle-locations/vehicle-locations.service';
 
 declare var google: any;
@@ -14,21 +16,26 @@ export class VehicleLocationMapComponent implements OnDestroy, OnInit {
   private interval;
   private map;
   private markers: MarkerCollection;
+  private vehicleSubscription: Subscription;
+  private routeOptionsSubscription: Subscription;
 
-  constructor(private vehicleLocations: VehicleLocationsService) { }
+  constructor(private routeOptions: RouteOptionsService, private vehicleLocations: VehicleLocationsService) { }
 
   ngOnInit() {
     this.createMap();
     this.subscribeToVehicleData();
+    this.subscribeToRouteOptionsChanges();
   }
 
   ngOnDestroy() {
     clearInterval(this.interval);
+    this.vehicleSubscription.unsubscribe();
+    this.routeOptionsSubscription.unsubscribe();
   }
 
   private buildMarkers(locs: any) {
     locs.locations.forEach(loc => {
-      this.markers.merge(loc);
+      this.markers.merge(loc, this.routeOptions.shouldDisplayRoute('sf-muni', loc.routeTag));
     });
   }
 
@@ -41,8 +48,16 @@ export class VehicleLocationMapComponent implements OnDestroy, OnInit {
     this.markers = new MarkerCollection(this.map);
   }
 
+  private subscribeToRouteOptionsChanges() {
+    this.routeOptionsSubscription = this.routeOptions.changedOptions.subscribe(changes =>
+      changes.forEach(change =>
+        this.routeOptions.shouldDisplayRoute(change.agency, change.route) ?
+          this.markers.show(change.route) :
+          this.markers.hide(change.route)));
+  }
+
   private subscribeToVehicleData() {
-    this.vehicleLocations.data.subscribe(locs => this.buildMarkers(locs));
+    this.vehicleSubscription = this.vehicleLocations.data.subscribe(locs => this.buildMarkers(locs));
     this.vehicleLocations.refresh('sf-muni');
     this.interval = setInterval(() => this.vehicleLocations.refresh('sf-muni'), 15000);
   }

@@ -4,6 +4,8 @@ import { HttpModule } from '@angular/http';
 
 import { throwIfAlreadyLoaded } from './module-import-guard';
 
+import { RouteOptionsService } from './route-options/route-options.service';
+import { RoutesService } from './routes/routes.service';
 import { VehicleLocationsService } from './vehicle-locations/vehicle-locations.service';
 
 @NgModule({
@@ -12,6 +14,8 @@ import { VehicleLocationsService } from './vehicle-locations/vehicle-locations.s
     HttpModule
   ],
   providers: [
+    RouteOptionsService,
+    RoutesService,
     VehicleLocationsService
   ]
 })
