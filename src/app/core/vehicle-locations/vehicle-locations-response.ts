@@ -1,6 +1,6 @@
 import { VehicleLocation } from './vehicle-location';
 
-export interface VehicleLoctationResponse {
+export interface VehicleLoctationsResponse {
   lastTime: number,
   locations: Array<VehicleLocation>
 }

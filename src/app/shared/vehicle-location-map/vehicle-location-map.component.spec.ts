@@ -2,7 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { Subject } from 'rxjs/Subject';
 
 import { VehicleLocationMapComponent } from './vehicle-location-map.component';
-import { VehicleLocationService } from '../../core/vehicle-location/vehicle-location.service';
+import { VehicleLocationsService } from '../../core/vehicle-locations/vehicle-locations.service';
 
 window['google'] = {
   maps: {
@@ -36,7 +36,7 @@ describe('NextBusMapComponent', () => {
     TestBed.configureTestingModule({
       declarations: [VehicleLocationMapComponent],
       providers: [
-        { provide: VehicleLocationService, useClass: VehicleLocationServiceMock }
+        { provide: VehicleLocationsService, useClass: VehicleLocationServiceMock }
       ]
     }).compileComponents();
   }));
