@@ -1,5 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { Subject } from 'rxjs/Subject';
+import { LocalStorageService } from 'angular-2-local-storage';
 
 import { RouteOptionsService } from '../../core/route-options/route-options.service';
 import { VehicleLocationMapComponent } from './vehicle-location-map.component';
@@ -15,6 +16,11 @@ window['google'] = {
     Marker: function() { }
   }
 };
+
+class LocalStorageServiceMock {
+  get(key: string): any { return null; }
+  set(key: string, value: any): void { }
+}
 
 class VehicleLocationServiceMock {
   data: Subject<any>;
@@ -37,6 +43,7 @@ describe('VehicleLocationMapComponent', () => {
     TestBed.configureTestingModule({
       declarations: [VehicleLocationMapComponent],
       providers: [
+        { provide: LocalStorageService, useClass: LocalStorageServiceMock },
         RouteOptionsService,
         { provide: VehicleLocationsService, useClass: VehicleLocationServiceMock }
       ]

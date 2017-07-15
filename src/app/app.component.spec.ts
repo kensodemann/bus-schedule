@@ -1,9 +1,15 @@
 import { TestBed, async } from '@angular/core/testing';
-import { MdCheckboxModule, MdIconModule, MdListModule, MdSidenavModule, MdToolbarModule } from '@angular/material';
+import { MdIconModule, MdSidenavModule, MdToolbarModule } from '@angular/material';
+import { LocalStorageService } from 'angular-2-local-storage';
 
 import { AppComponent } from './app.component';
 import { CoreModule } from './core/core.module';
 import { SharedModule } from './shared/shared.module';
+
+class LocalStorageServiceMock {
+  get(key: string): any { return null; }
+  set(key: string, value: any): void { }
+}
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
@@ -13,12 +19,13 @@ describe('AppComponent', () => {
       ],
       imports: [
         CoreModule,
-        MdCheckboxModule,
         MdIconModule,
-        MdListModule,
         MdSidenavModule,
         MdToolbarModule,
         SharedModule
+      ],
+      providers: [
+        { provide: LocalStorageService, useClass: LocalStorageServiceMock }
       ]
     }).compileComponents();
   }));

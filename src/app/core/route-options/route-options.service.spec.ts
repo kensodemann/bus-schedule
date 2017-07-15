@@ -1,10 +1,17 @@
 import { RouteOptionsService } from './route-options.service';
+import { LocalStorageService } from 'angular-2-local-storage';
+
+class LocalStorageServiceMock {
+  get(key: string): any { return null; }
+  set(key: string, value: any): void { }
+}
 
 describe('RouteOptionsService', () => {
   let service: RouteOptionsService;
 
   beforeEach(() => {
-    service = new RouteOptionsService();
+    const localStorage = new LocalStorageServiceMock();
+    service = new RouteOptionsService(localStorage as LocalStorageService);
   });
 
   it('exists', () => {
