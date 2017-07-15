@@ -1,22 +1,16 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
-import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/switchMap';
 import { Subject } from 'rxjs/Subject';
 import { parseString } from 'xml2js';
 
 import { environment } from '../../../environments/environment';
+import { VehicleLoctationResponse } from './vehicle-location-response';
 
-// TODO: make this plural and rename the files
 @Injectable()
 export class VehicleLocationService {
-  private vehicles: any;
-  private lastAgency: string;
-  private lastTime: number;
 
-  data: Subject<any>;
+  data: Subject<VehicleLoctationResponse>;
 
   constructor(private http: Http) {
     this.data = new Subject();
@@ -42,4 +36,5 @@ export class VehicleLocationService {
       });
     });
   }
+
 }

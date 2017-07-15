@@ -1,7 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { Subject } from 'rxjs/Subject';
 
-import { MapComponent } from './map.component';
+import { VehicleLocationMapComponent } from './vehicle-location-map.component';
 import { VehicleLocationService } from '../../core/vehicle-location/vehicle-location.service';
 
 window['google'] = {
@@ -29,12 +29,12 @@ class VehicleLocationServiceMock {
 }
 
 describe('NextBusMapComponent', () => {
-  let component: MapComponent;
-  let fixture: ComponentFixture<MapComponent>;
+  let component: VehicleLocationMapComponent;
+  let fixture: ComponentFixture<VehicleLocationMapComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [MapComponent],
+      declarations: [VehicleLocationMapComponent],
       providers: [
         { provide: VehicleLocationService, useClass: VehicleLocationServiceMock }
       ]
@@ -42,7 +42,7 @@ describe('NextBusMapComponent', () => {
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(MapComponent);
+    fixture = TestBed.createComponent(VehicleLocationMapComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
