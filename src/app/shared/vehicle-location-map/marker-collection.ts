@@ -33,5 +33,13 @@ export class MarkerCollection {
     this.hash[loc.routeTag][loc.id].setPosition(new google.maps.LatLng(loc.lat, loc.lon));
   }
 
-  private removeFromOtherRoutes(loc: VehicleLocation): void { }
+  private removeFromOtherRoutes(loc: VehicleLocation): void {
+    const routes = Object.keys(this.hash);
+    routes.forEach(route => {
+      if (route !== loc.routeTag && this.hash[route][loc.id]) {
+        this.hash[route][loc.id].map = null;
+        delete this.hash[route][loc.id];
+      }
+    });
+  }
 }
