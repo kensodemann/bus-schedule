@@ -2,7 +2,21 @@
 
 [![Build Status][travis-badge]][travis-badge-url]
 
-Demo App
+This is a demo application being written as a project to present in an interview. At this point, it does the following
+
+- Displays the location of vehicles for selected sf-muni routes
+- Defaults to having no routes selected (I had it with ALL but that was obnoxious)
+- Refreshes the locations every 15 seconds
+
+Posible improvements:
+
+- Persist selected routes to local storage
+- Different colors for different routes
+- A select/unselect all checkbox
+- Filtering of the routes in the selector
+- Better transition of markers when a vehicle moves
+- Allow for selection of a different agency
+- I may think of other stuff...
 
 ## Running Local
 
@@ -23,7 +37,9 @@ Build, then deploy:
 - `cp dist/index.html dist/404.html`
 - `ngh --message='chore: deploy version x.y.z'`
 
-For more information, see [angular-cli-ghpages](https://github.com/angular-buch/angular-cli-ghpages) 
+For more information, see [angular-cli-ghpages](https://github.com/angular-buch/angular-cli-ghpages)
+
+I currently have it [deployed](https://kensodemann.github.io/bus-schedule). Note that you have to allow loading of unsafe scripts in order for it to actually work currently. This is due to how the data is served. It could be solved by the data being served via HTTPS instead of HTTP.
 
 
 [travis-badge]: https://travis-ci.org/kensodemann/bus-schedule.svg?branch=master
