@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 import { RouteOptionsService } from '../../../core/route-options/route-options.service';
 import { Route } from '../../../core/routes/route';
@@ -12,6 +12,7 @@ export class RouteItemComponent implements OnInit {
   checked: boolean;
 
   @Input() route: Route;
+  @Output() routeSelect = new EventEmitter<boolean>();
 
   constructor(private options: RouteOptionsService) { }
 
@@ -21,6 +22,7 @@ export class RouteItemComponent implements OnInit {
 
   onRouteChecked(checked) {
     checked ? this.options.showRoute('sf-muni', this.route.tag) : this.options.hideRoute('sf-muni', this.route.tag);
+    this.routeSelect.emit(checked);
   }
 
 }

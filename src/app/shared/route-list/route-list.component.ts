@@ -8,6 +8,7 @@ import { Route } from '../../core/routes/route';
   styleUrls: ['./route-list.component.scss']
 })
 export class RouteListComponent implements OnInit {
+  selectAll: boolean;
 
   @Input() routes: Array<Route>;
 

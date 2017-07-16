@@ -59,5 +59,14 @@ describe('RouteItemComponent', () => {
       expect(routeOptions.hideRoute).toHaveBeenCalledTimes(1);
       expect(routeOptions.hideRoute).toHaveBeenCalledWith('sf-muni', 'ABC');
     });
+
+    it('emits a routeselect event', () => {
+      let result;
+      component.routeSelect.subscribe(x => result = x);
+      component.onRouteChecked(false);
+      expect(result).toEqual(false);
+      component.onRouteChecked(true);
+      expect(result).toEqual(true);
+    });
   });
 });
