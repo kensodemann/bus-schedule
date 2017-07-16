@@ -10,17 +10,13 @@ This is a demo application being written as a project to present in an interview
 
 Posible improvements:
 
-- Persist selected routes to local storage
+- ~~Persist selected routes to local storage~~ (Done)
 - Different colors for different routes
 - A select/unselect all checkbox
 - Filtering of the routes in the selector
-- Better transition of markers when a vehicle moves
+- ~~Better transition of markers when a vehicle moves~~ (Sort of done - animated placement of new markers)
 - Allow for selection of a different agency
 - I may think of other stuff...
-
-Possible Improvements I Have Managed to Accomplish:
-
-- Persist selected routes to local storage
 
 ## Running Local
 

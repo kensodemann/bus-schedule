@@ -25,11 +25,13 @@ export class MarkerCollection {
   }
 
   private addMarker(loc: VehicleLocation, show: boolean): void {
+    console.log(google.maps);
     this.hash[loc.routeTag] = this.hash[loc.routeTag] || {};
     this.hash[loc.routeTag][loc.id] = new google.maps.Marker({
       position: new google.maps.LatLng(loc.lat, loc.lon),
       map: show ? this.map : null,
-      title: loc.id
+      title: loc.id,
+      animation: google.maps.Animation.DROP
     });
   }
 
@@ -56,7 +58,10 @@ export class MarkerCollection {
   private setMapOnMarkers(route: string, map: any) {
     if (this.hash[route]) {
       const keys = Object.keys(this.hash[route]);
-      keys.forEach(key => this.hash[route][key].setMap(map));
+      keys.forEach(key => {
+        this.hash[route][key].setAnimation(google.maps.Animation.DROP);
+        this.hash[route][key].setMap(map)
+      });
     }
   }
 }
