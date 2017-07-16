@@ -6,17 +6,6 @@ import { RouteOptionsService } from '../../core/route-options/route-options.serv
 import { VehicleLocationMapComponent } from './vehicle-location-map.component';
 import { VehicleLocationsService } from '../../core/vehicle-locations/vehicle-locations.service';
 
-window['google'] = {
-  maps: {
-    LatLng: function() { },
-    Map: function() { },
-    MapTypeId: {
-      ROADMAP: 1
-    },
-    Marker: function() { }
-  }
-};
-
 class LocalStorageServiceMock {
   get(key: string): any { return null; }
   set(key: string, value: any): void { }
@@ -38,6 +27,23 @@ class VehicleLocationServiceMock {
 describe('VehicleLocationMapComponent', () => {
   let component: VehicleLocationMapComponent;
   let fixture: ComponentFixture<VehicleLocationMapComponent>;
+
+  beforeAll(() => {
+    window['google'] = {
+      maps: {
+        Animation: {
+          BOUNCE: 1,
+          DROP: 2
+        },
+        LatLng: function() { },
+        Map: function() { },
+        MapTypeId: {
+          ROADMAP: 1
+        },
+        Marker: function() { }
+      }
+    };
+  });
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({

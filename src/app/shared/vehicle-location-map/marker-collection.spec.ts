@@ -1,21 +1,33 @@
 import { MarkerCollection } from './marker-collection';
 import { VehicleLocation } from '../../core/vehicle-locations/vehicle-location';
 
-window['google'] = {
-  maps: {
-    LatLng: function() { },
-    Map: function() { },
-    MapTypeId: {
-      ROADMAP: 1
-    },
-    Marker: function() { }
-  }
-};
+class MarkerMock {
+  setAnimation() { }
+  setMap() { }
+  setPosition() { }
+}
 
 declare var google: any;
 
 describe('MarkerCollection', () => {
   let testVehicle: VehicleLocation;
+
+  beforeAll(() => {
+    window['google'] = {
+      maps: {
+        Animation: {
+          BOUNCE: 1,
+          DROP: 2
+        },
+        LatLng: function() { },
+        Map: function() { },
+        MapTypeId: {
+          ROADMAP: 1
+        },
+        Marker: function() { }
+      }
+    };
+  });
 
   beforeEach(() => {
     initializeTestData();
@@ -42,7 +54,8 @@ describe('MarkerCollection', () => {
       expect(google.maps.Marker).toHaveBeenCalledWith({
         position: { lat: testVehicle.lat, lng: testVehicle.lon },
         map: map,
-        title: testVehicle.id
+        title: testVehicle.id,
+        animation: google.maps.Animation.DROP
       });
     });
 
@@ -61,7 +74,8 @@ describe('MarkerCollection', () => {
       expect(google.maps.Marker).toHaveBeenCalledWith({
         position: { lat: testVehicle.lat, lng: testVehicle.lon },
         map: null,
-        title: testVehicle.id
+        title: testVehicle.id,
+        animation: google.maps.Animation.DROP
       });
     });
 
@@ -73,7 +87,7 @@ describe('MarkerCollection', () => {
         lat: testVehicle.lat,
         lng: testVehicle.lon
       });
-      const marker = { setPosition: function() { }, setMap: function() { } };
+      const marker = new MarkerMock();
       spyOn(google.maps, 'Marker').and.returnValue(marker);
       m.merge(testVehicle, true);
       spyOn(marker, 'setPosition');
