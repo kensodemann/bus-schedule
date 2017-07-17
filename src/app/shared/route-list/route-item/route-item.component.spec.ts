@@ -36,4 +36,28 @@ describe('RouteItemComponent', () => {
   it('should be created', () => {
     expect(component).toBeTruthy();
   });
+
+  describe('on route checked', () => {
+    let routeOptions;
+    beforeEach(() => {
+      routeOptions = fixture.debugElement.injector.get(RouteOptionsService);
+      spyOn(routeOptions, 'hideRoute').and.callThrough();
+      spyOn(routeOptions, 'showRoute').and.callThrough();
+      component.route = { tag: 'ABC', title: 'Seasame Street' };
+    });
+
+    it('shows the route', () => {
+      component.onRouteChecked(true);
+      expect(routeOptions.hideRoute).not.toHaveBeenCalled();
+      expect(routeOptions.showRoute).toHaveBeenCalledTimes(1);
+      expect(routeOptions.showRoute).toHaveBeenCalledWith('sf-muni', 'ABC');
+    });
+
+    it('hides the route', () => {
+      component.onRouteChecked(false);
+      expect(routeOptions.showRoute).not.toHaveBeenCalled();
+      expect(routeOptions.hideRoute).toHaveBeenCalledTimes(1);
+      expect(routeOptions.hideRoute).toHaveBeenCalledWith('sf-muni', 'ABC');
+    });
+  });
 });
