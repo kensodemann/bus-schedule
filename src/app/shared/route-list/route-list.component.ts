@@ -20,6 +20,11 @@ export class RouteListComponent implements OnInit {
 
   onSelectAllChecked(checked) {
     const routes = this.routes.map(r => r.tag);
+    if (checked) {
+      this.routeOptions.showRoute('sf-muni', routes);
+    } else {
+      this.routeOptions.hideRoute('sf-muni', routes);
+    }
   }
 
 }
