@@ -11,7 +11,7 @@ import { RouteOptionsService } from '../../core/route-options/route-options.serv
 class RouteOptionsServiceMock {
   changedOptions: Subject<Array<any>>;
 
-  constructor() { this.changedOptions = new Subject();}
+  constructor() { this.changedOptions = new Subject(); }
 
   hideRoute(agency: string, route: string | Array<string>) { }
   showRoute(agency: string, route: string | Array<string>) { }
@@ -64,7 +64,7 @@ describe('RouteListComponent', () => {
 
     it('sets selectAll false if at least one route should not be displayed', () => {
       const routeOptions = fixture.debugElement.injector.get(RouteOptionsService);
-      spyOn(routeOptions, 'shouldDisplayRoute').and.returnValues([true, true, false, true, true, true, true]);
+      spyOn(routeOptions, 'shouldDisplayRoute').and.returnValues(true, true, false, true, true, true, true);
       component.ngOnInit();
       expect(component.selectAll).toEqual(false);
       expect(routeOptions.shouldDisplayRoute).toHaveBeenCalledTimes(3);
