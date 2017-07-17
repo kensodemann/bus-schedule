@@ -17,12 +17,17 @@ export class RouteItemComponent implements OnInit {
   constructor(private options: RouteOptionsService) { }
 
   ngOnInit() {
-    this.checked = this.options.shouldDisplayRoute('sf-muni', this.route.tag);
+    this.setChecked();
+    this.options.changedOptions.subscribe(() => this.setChecked());
   }
 
   onRouteChecked(checked) {
     checked ? this.options.showRoute('sf-muni', this.route.tag) : this.options.hideRoute('sf-muni', this.route.tag);
     this.routeSelect.emit(checked);
+  }
+
+  private setChecked() {
+    this.checked = this.options.shouldDisplayRoute('sf-muni', this.route.tag);
   }
 
 }

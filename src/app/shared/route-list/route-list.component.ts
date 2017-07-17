@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 
+import { RouteOptionsService } from '../../core/route-options/route-options.service';
 import { Route } from '../../core/routes/route';
 
 @Component({
@@ -12,9 +13,13 @@ export class RouteListComponent implements OnInit {
 
   @Input() routes: Array<Route>;
 
-  constructor() { }
+  constructor(private routeOptions: RouteOptionsService) { }
 
   ngOnInit() {
+  }
+
+  onSelectAllChecked(checked) {
+    const routes = this.routes.map(r => r.tag);
   }
 
 }

@@ -1,4 +1,7 @@
 <md-list>
+  <md-list-item>
+    <md-checkbox [ngModel]="selectAll" (ngModelChange)="onSelectAllChecked($event)">Select All</md-checkbox>
+  </md-list-item>
   <md-list-item *ngFor="let route of routes">
     <bus-route-item [route]="route"></bus-route-item>
   </md-list-item>
