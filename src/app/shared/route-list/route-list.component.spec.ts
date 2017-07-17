@@ -53,6 +53,24 @@ describe('RouteListComponent', () => {
     expect(component).toBeTruthy();
   });
 
+  describe('initialization', () => {
+    it('sets selectAll true if all routes should be displayed', () => {
+      const routeOptions = fixture.debugElement.injector.get(RouteOptionsService);
+      spyOn(routeOptions, 'shouldDisplayRoute').and.returnValue(true);
+      component.ngOnInit();
+      expect(component.selectAll).toEqual(true);
+      expect(routeOptions.shouldDisplayRoute).toHaveBeenCalledTimes(7);
+    });
+
+    it('sets selectAll false if at least one route should not be displayed', () => {
+      const routeOptions = fixture.debugElement.injector.get(RouteOptionsService);
+      spyOn(routeOptions, 'shouldDisplayRoute').and.returnValues([true, true, false, true, true, true, true]);
+      component.ngOnInit();
+      expect(component.selectAll).toEqual(false);
+      expect(routeOptions.shouldDisplayRoute).toHaveBeenCalledTimes(3);
+    });
+  });
+
   describe('select all routes', () => {
     describe('true', () => {
       it('registers the change with the route options service', () => {
@@ -77,7 +95,6 @@ describe('RouteListComponent', () => {
         expect(routeOptions.hideRoute).not.toHaveBeenCalled();
       });
     });
-
   });
 
   function initiailizeTestData() {

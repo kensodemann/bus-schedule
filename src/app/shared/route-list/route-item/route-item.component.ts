@@ -12,7 +12,7 @@ export class RouteItemComponent implements OnInit {
   checked: boolean;
 
   @Input() route: Route;
-  @Output() routeSelect = new EventEmitter<boolean>();
+  @Output() routeChecked = new EventEmitter<boolean>();
 
   constructor(private options: RouteOptionsService) { }
 
@@ -23,7 +23,7 @@ export class RouteItemComponent implements OnInit {
 
   onRouteChecked(checked) {
     checked ? this.options.showRoute('sf-muni', this.route.tag) : this.options.hideRoute('sf-muni', this.route.tag);
-    this.routeSelect.emit(checked);
+    this.routeChecked.emit(checked);
   }
 
   private setChecked() {

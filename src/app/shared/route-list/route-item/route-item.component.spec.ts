@@ -62,7 +62,7 @@ describe('RouteItemComponent', () => {
 
     it('emits a routeselect event', () => {
       let result;
-      component.routeSelect.subscribe(x => result = x);
+      component.routeChecked.subscribe(x => result = x);
       component.onRouteChecked(false);
       expect(result).toEqual(false);
       component.onRouteChecked(true);

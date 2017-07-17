@@ -16,6 +16,7 @@ export class RouteListComponent implements OnInit {
   constructor(private routeOptions: RouteOptionsService) { }
 
   ngOnInit() {
+    this.selectAll = !!this.routes && this.allRoutesAreSelected();
   }
 
   onSelectAllChecked(checked) {
@@ -25,6 +26,13 @@ export class RouteListComponent implements OnInit {
     } else {
       this.routeOptions.hideRoute('sf-muni', routes);
     }
+  }
+
+  private allRoutesAreSelected(): boolean {
+    let allSelected = true;
+    this.routes.forEach(route =>
+      allSelected = allSelected && this.routeOptions.shouldDisplayRoute('sf-muni', route.tag));
+    return allSelected;
   }
 
 }
