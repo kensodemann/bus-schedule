@@ -22,7 +22,7 @@ Posible improvements:
 
 Standard workflow:
 
-- `yarn`
+- `npm i`
 - open three terminals, run one command in each:
   - `npm test`
   - `npm start`
